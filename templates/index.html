@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chatbot Interface</title>
+  </head>
+  <body>
+    <h1>Chatbot Interface</h1>
+    <form id="chat-form">
+      <label for="user-input">Enter text:</label>
+      <input type="text" id="user-input" />
+      <button type="submit">Send</button>
+    </form>
+    <div id="chat-log"></div>
+
+    <script>
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("user-input");
+      const log = document.getElementById("chat-log");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const response = await fetch("/api/chatbot", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ input_text: input.value }),
+        });
+
+        const data = await response.json();
+        const botMessage = data.response;
+
+        const message = document.createElement("div");
+        message.classList.add("message");
+        message.innerHTML = `<span class="sender">User:</span> ${input.value}`;
+        log.appendChild(message);
+
+        const botResponse = document.createElement("div");
+        botResponse.classList.add("message");
+        botResponse.innerHTML = `<span class="sender">Bot:</span> ${botMessage}`;
+        log.appendChild(botResponse);
+
+        input.value = "";
+      });
+    </script>
+
+    <style>
+      .message {
+        margin: 5px 0;
+      }
+
+      .sender {
+        font-weight: bold;
+      }
+
+      .sender + * {
+        margin-left: 5px;
+      }
+    </style>
+  </body>
+</html>
