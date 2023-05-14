@@ -11,4 +11,4 @@ This is a simple Flask app that uses OpenAI's GPT-3 API to create a chatbot that
 2. Enter some text in the input box and click the "Send" button.
 3. The chatbot will generate a response based on the input and display it on the page.
 ## Configuration
-You can configure the chatbot by editing the generate_response() function in app.py. For example, you can change the engine, temperature, or maximum number of tokens used by the API. See the OpenAI API documentation for more information.
+You can configure the chatbot by editing the generate_response() function in app.py. For example, you can change the engine, temperature, or maximum number of tokens used by the API. See the [OpenAI API documentation](https://platform.openai.com/docs/introduction) for more information.
